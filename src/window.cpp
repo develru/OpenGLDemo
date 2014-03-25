@@ -28,3 +28,11 @@ Window::Window(GLint width, GLint height, std::string title)
         throw GLException("Failed to create the window");
     }
 }
+
+Window::~Window()
+{
+    glfwDestroyWindow(window);
+    instanceCount--;
+    if(instanceCount == 0)
+        glfwTerminate();
+}
