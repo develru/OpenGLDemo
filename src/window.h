@@ -15,6 +15,9 @@ class Window
 public:
     Window(GLint width, GLint height, std::string title);
     ~Window();
+
+    void makeContextCurrent();
+    bool shouldClose();
 };
 
 #endif // WINDOW_H

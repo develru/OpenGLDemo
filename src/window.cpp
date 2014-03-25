@@ -36,3 +36,13 @@ Window::~Window()
     if(instanceCount == 0)
         glfwTerminate();
 }
+
+void Window::makeContextCurrent()
+{
+    glfwMakeContextCurrent(window);
+}
+
+bool Window::shouldClose()
+{
+    return glfwWindowShouldClose(window);
+}
