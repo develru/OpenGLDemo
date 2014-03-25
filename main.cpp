@@ -6,9 +6,13 @@
 
 int main()
 {
+    std::cout << "Hello" << std::endl;
+
     if (!glfwInit()) {
         return -1;
     }
+
+    std::cout << glGetString(GL_VERSION) << std::endl;
 
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -22,7 +26,7 @@ int main()
         return -1;
     }
 
-    std::cout << glGetString(GL_VERSION);
+    glfwMakeContextCurrent(window);
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
