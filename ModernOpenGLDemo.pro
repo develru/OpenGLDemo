@@ -6,7 +6,7 @@ CONFIG -= qt
 SOURCES += main.cpp \
     src/window.cpp
 
-LIBS += -L/opt/local/lib -lglfw -lgl
+LIBS += -L/opt/local/lib -lglfw -lgl -lil
 
 INCLUDEPATH += /opt/local/include
 
