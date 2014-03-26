@@ -5,7 +5,7 @@ GLException::GLException(std::string what) :
 {
 }
 
-GLException::~GLException()
+GLException::~GLException() throw()
 {
     std::exception::~exception();
 }
