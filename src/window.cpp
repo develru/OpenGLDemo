@@ -46,3 +46,11 @@ bool Window::shouldClose()
 {
     return glfwWindowShouldClose(window);
 }
+
+void Window::swapBuffers()
+{
+    glfwSwapBuffers(window);
+    GLdouble currentTime = glfwGetTime();
+    deltaTime = currentTime - lastBufferSwapTime;
+    lastBufferSwapTime = currentTime;
+}

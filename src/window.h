@@ -18,6 +18,7 @@ public:
 
     void makeContextCurrent();
     bool shouldClose();
+    void swapBuffers();
 };
 
 #endif // WINDOW_H
