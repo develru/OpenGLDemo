@@ -1,38 +1,35 @@
 #define GLFW_INCLUDE_GLCOREARB
 
 #include <iostream>
+#include <memory>
 #include <GLFW/glfw3.h>
-
+#include "src/glexception.h"
+#include "src/window.h"
 
 int main()
 {
-    std::cout << "Hello" << std::endl;
+    try {
+        std::unique_ptr<Window> window(new Window(800, 600, "OpenGL"));
+        window->makeContextCurrent();
 
-    if (!glfwInit()) {
-        return -1;
-    }
+//        std::cout << glGetString(GL_VERSION) << std::endl;
 
-    std::cout << glGetString(GL_VERSION) << std::endl;
+        glClearColor(0.0, 0.0, 0.0, 1.0);
 
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "OpenGL", nullptr, nullptr);
+        while (!window->shouldClose()) {
+            glClear(GL_COLOR_BUFFER_BIT);
 
-    if (!window) {
+            glfwPollEvents();
+            window->swapBuffers();
+        }
+
         glfwTerminate();
-        return -1;
+    } catch (GLException &e) {
+        std::cerr << e.what() << std::endl;
     }
 
-    glfwMakeContextCurrent(window);
-
-    while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
-
-    }
-
-    glfwTerminate();
     return 0;
 }
